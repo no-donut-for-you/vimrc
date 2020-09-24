@@ -311,6 +311,7 @@ Signs:~
 Hunk previews:~
 
     |g:gitgutter_preview_win_floating|
+    |g:gitgutter_close_preview_on_escape|
 
 Terminal:~
 
@@ -438,6 +439,7 @@ will not preserve non-gitgutter signs.
                                           *g:gitgutter_sign_modified*
                                           *g:gitgutter_sign_removed*
                                           *g:gitgutter_sign_removed_first_line*
+                                          *g:gitgutter_sign_removed_above_and_below*
                                           *g:gitgutter_sign_modified_removed*
 Defaults:
 >
@@ -445,6 +447,7 @@ Defaults:
     let g:gitgutter_sign_modified           = '~'
     let g:gitgutter_sign_removed            = '_'
     let g:gitgutter_sign_removed_first_line = '‾'
+    let g:gitgutter_sign_removed_above_and_below = '_¯'
     let g:gitgutter_sign_modified_removed   = '~_'
 <
 You can use unicode characters but not images.  Signs must not take up more than
@@ -467,6 +470,11 @@ Default: 0 (Vim)
 Whether to use floating/popup windows for hunk previews.  Note that if you use
 popup windows on Vim you will not be able to stage partial hunks via the
 preview window.
+
+                                          *g:gitgutter_close_preview_on_escape*
+Default: 0
+
+Whether pressing <Esc> in a non-floating preview window closes it.
 
                                            *g:gitgutter_terminal_reports_focus*
 Default: 1

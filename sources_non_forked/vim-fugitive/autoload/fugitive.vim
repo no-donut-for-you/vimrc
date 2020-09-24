@@ -551,9 +551,9 @@ function! fugitive#Config(...) abort
     let dir = a:1
   endif
   let name = substitute(name, '^[^.]\+\|[^.]\+$', '\L&', 'g')
-  let key = len(dir) ? dir : '_'
-  if has_key(s:config, key) && s:config[key][0] ==# s:ConfigTimestamps(dir, s:config[key][1])
-    let dict = s:config[key][1]
+  let dir_key = len(dir) ? dir : '_'
+  if has_key(s:config, dir_key) && s:config[dir_key][0] ==# s:ConfigTimestamps(dir, s:config[dir_key][1])
+    let dict = s:config[dir_key][1]
   else
     let dict = {}
     let [lines, message, exec_error] = s:NullError([dir, 'config', '--list', '-z'])
@@ -571,7 +571,7 @@ function! fugitive#Config(...) abort
         call add(dict[key], strpart(line, len(key) + 1))
       endif
     endfor
-    let s:config[dir] = [s:ConfigTimestamps(dir, dict), dict]
+    let s:config[dir_key] = [s:ConfigTimestamps(dir, dict), dict]
     lockvar! dict
   endif
   return len(name) ? get(get(dict, name, []), 0, '') : dict
@@ -1622,7 +1622,7 @@ endfunction
 
 function! s:CompleteRemote(A, L, P, ...) abort
   let dir = a:0 ? a:1 : s:Dir()
-  let remote = matchstr(a:L, '\u\w*[! ] *\zs\S\+\ze ')
+  let remote = matchstr(a:L, '\u\w*[! ] *.\{-\}\s\@<=\zs[^-[:space:]]\S*\ze ')
   if !empty(remote)
     let matches = s:LinesError([dir, 'ls-remote', remote])[0]
     call filter(matches, 'v:val =~# "\t" && v:val !~# "{"')
@@ -2639,14 +2639,15 @@ endfunction
 
 let s:aliases = {}
 function! s:Aliases(dir) abort
-  if !has_key(s:aliases, a:dir)
-    let s:aliases[a:dir] = {}
+  let dir_key = len(a:dir) ? a:dir : '_'
+  if !has_key(s:aliases, dir_key)
+    let s:aliases[dir_key] = {}
     let lines = s:NullError([a:dir, 'config', '-z', '--get-regexp', '^alias[.]'])[0]
     for line in lines
-      let s:aliases[a:dir][matchstr(line, '\.\zs.\{-}\ze\n')] = matchstr(line, '\n\zs.*')
+      let s:aliases[dir_key][matchstr(line, '\.\zs.\{-}\ze\n')] = matchstr(line, '\n\zs.*')
     endfor
   endif
-  return s:aliases[a:dir]
+  return s:aliases[dir_key]
 endfunction
 
 function! fugitive#Complete(lead, ...) abort
@@ -3521,7 +3522,12 @@ function! s:StageApply(info, reverse, extra) abort
   let i = b:fugitive_expanded[info.section][info.filename][0]
   let head = []
   while get(b:fugitive_diff[info.section], i, '@') !~# '^@'
-    call add(head, b:fugitive_diff[info.section][i])
+    let line = b:fugitive_diff[info.section][i]
+    if line ==# '--- /dev/null'
+      call add(head, '--- ' . get(b:fugitive_diff[info.section], i + 1, '')[4:-1])
+    elseif line !~# '^new file '
+      call add(head, line)
+    endif
     let i += 1
   endwhile
   call extend(lines, head, 'keep')
@@ -3731,7 +3737,7 @@ function! s:DoUnstageStaged(record) abort
 endfunction
 
 function! s:DoToggleUnstaged(record) abort
-  if a:record.patch && a:record.status !=# 'A'
+  if a:record.patch
     return s:StageApply(a:record, 0, ['--cached'])
   else
     call s:TreeChomp(['add', '-A', '--'] + a:record.paths)
@@ -4621,10 +4627,8 @@ endfunction
 " Section: :Gwrite, :Gwq
 
 function! fugitive#WriteCommand(line1, line2, range, bang, mods, arg, args) abort
-  if exists('b:fugitive_commit_arguments')
-    return 'write|bdelete'
-  elseif expand('%:t') == 'COMMIT_EDITMSG' && $GIT_INDEX_FILE != ''
-    return 'wq'
+  if s:cpath(expand('%:p'), fugitive#Find('.git/COMMIT_EDITMSG'))
+    return (empty($GIT_INDEX_FILE) ? 'write|bdelete' : 'wq') . (a:bang ? '!' : '')
   elseif get(b:, 'fugitive_type', '') ==# 'index'
     return 'Git commit'
   elseif &buftype ==# 'nowrite' && getline(4) =~# '^[+-]\{3\} '
@@ -4753,7 +4757,7 @@ endfunction
 
 function! fugitive#WqCommand(...) abort
   let bang = a:4 ? '!' : ''
-  if exists('b:fugitive_commit_arguments')
+  if s:cpath(expand('%:p'), fugitive#Find('.git/COMMIT_EDITMSG'))
     return 'wq'.bang
   endif
   let result = call('fugitive#WriteCommand', a:000)
@@ -5558,7 +5562,7 @@ function! fugitive#BlameSyntax() abort
   endif
   syn match FugitiveblameScoreDebug        " *\d\+\s\+\d\+\s\@=" nextgroup=FugitiveblameAnnotation,FugitiveblameOriginalLineNumber,fugitiveblameOriginalFile contained skipwhite
   syn region FugitiveblameAnnotation matchgroup=FugitiveblameDelimiter start="(" end="\%(\s\d\+\)\@<=)" contained keepend oneline
-  syn match FugitiveblameTime "[0-9:/+-][0-9:/+ -]*[0-9:/+-]\%(\s\+\d\+)\)\@=" contained containedin=FugitiveblameAnnotation
+  syn match FugitiveblameTime "\<[0-9:/+-][0-9:/+ -]*[0-9:/+-]\%(\s\+\d\+)\)\@=" contained containedin=FugitiveblameAnnotation
   exec 'syn match FugitiveblameLineNumber         "\s*\d\+)\@=" contained containedin=FugitiveblameAnnotation' conceal
   exec 'syn match FugitiveblameOriginalFile       "\s\%(\f\+\D\@<=\|\D\@=\f\+\)\%(\%(\s\+\d\+\)\=\s\%((\|\s*\d\+)\)\)\@=" contained nextgroup=FugitiveblameOriginalLineNumber,FugitiveblameAnnotation skipwhite' (s:HasOpt(flags, '--show-name', '-f') ? '' : conceal)
   exec 'syn match FugitiveblameOriginalLineNumber "\s*\d\+\%(\s(\)\@=" contained nextgroup=FugitiveblameAnnotation skipwhite' (s:HasOpt(flags, '--show-number', '-n') ? '' : conceal)
