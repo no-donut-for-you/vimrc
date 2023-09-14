@@ -13,9 +13,11 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:.,space:.
 set showbreak=↪
 set nowrap
 set shiftwidth=2
+set title
 let g:blamer_enabled = 1
 nnoremap <silent> <Leader>f :Rg<CR>
-
+vnoremap <silent> <Leader>c :w !pbcopy<CR>
+nnoremap <Leader>l <C-^>
 
 " This is the default extra key bindings
 let g:fzf_action = {
