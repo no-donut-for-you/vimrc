@@ -14,8 +14,13 @@ set showbreak=↪
 set nowrap
 set shiftwidth=2
 set title
+set notermguicolors
 let g:blamer_enabled = 1
 let NERDTreeShowHidden=1
+let g:airline_theme='minimalist'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
 nnoremap <silent> <Leader>f :Rg<CR>
 vnoremap <silent> <Leader>c :w !pbcopy<CR>
 nnoremap <Leader>l <C-^>
