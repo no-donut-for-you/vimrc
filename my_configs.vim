@@ -1,7 +1,6 @@
 colorscheme arcadia
 
-let g:NERDTreeWinPos = "left"
-
+set encoding=utf-8
 set nolinebreak
 set number
 set cursorline
@@ -15,10 +14,11 @@ set nowrap
 set shiftwidth=2
 set title
 set notermguicolors
-let g:blamer_enabled = 1
+
+let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=1
+let g:blamer_enabled=1
 let g:airline_theme='minimalist'
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 nnoremap <silent> <Leader>f :Rg<CR>
@@ -89,3 +89,4 @@ let g:fzf_colors =
 " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+set nofoldenable

@@ -121,8 +121,14 @@ function! s:TreeDirNode.findNode(path)
     if a:path.equals(self.path)
         return self
     endif
-    if stridx(a:path.str(), self.path.str(), 0) ==# -1
-        return {}
+    if nerdtree#caseSensitiveFS()
+        if stridx(a:path.str(), self.path.str(), 0) ==# -1
+            return {}
+        endif
+    else
+        if stridx(tolower(a:path.str()), tolower(self.path.str()), 0) ==# -1
+            return {}
+        endif
     endif
 
     if self.path.isDirectory
@@ -277,6 +283,10 @@ function! s:TreeDirNode._glob(pattern, all)
         let l:pathSpec = ','
     else
         let l:pathSpec = escape(fnamemodify(self.path.str({'format': 'Glob'}), ':.'), ',')
+
+        if nerdtree#runningWindows()
+            let l:pathSpec = substitute(l:pathSpec, "\\[\\(.*\\]\\)", "[[]\\1", "g")
+        endif
 
         " On Windows, the drive letter may be removed by "fnamemodify()".
         if nerdtree#runningWindows() && l:pathSpec[0] == nerdtree#slash()
@@ -572,7 +582,7 @@ function! s:TreeDirNode.refresh()
                 "create a new path and see if it exists in this nodes children
                 let path = g:NERDTreePath.New(i)
                 let newNode = self.getChild(path)
-                if newNode !=# {}
+                if newNode !=# {} && path.str() ==# newNode.path.str()
                     call newNode.refresh()
                     call add(newChildNodes, newNode)
 

@@ -46,6 +46,9 @@ formatting.
 * ASM
   * [gcc](https://gcc.gnu.org)
   * [llvm-mc](https://llvm.org)
+* Astro
+  * [eslint](http://eslint.org/)
+  * [prettier](https://github.com/prettier/prettier)
 * AVRA
   * [avra](https://github.com/Ro5bert/avra)
 * Awk
@@ -76,6 +79,7 @@ formatting.
   * [ccls](https://github.com/MaskRay/ccls)
   * [clang](http://clang.llvm.org/)
   * [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
+  * [clangcheck](http://clang.llvm.org/docs/ClangCheck.html) :floppy_disk:
   * [clangd](https://clang.llvm.org/extra/clangd.html)
   * [clangtidy](http://clang.llvm.org/extra/clang-tidy/) :floppy_disk:
   * [cppcheck](http://cppcheck.sourceforge.net)
@@ -110,6 +114,7 @@ formatting.
   * [gcc](https://gcc.gnu.org/)
   * [uncrustify](https://github.com/uncrustify/uncrustify)
 * Cairo
+  * [scarb](https://docs.swmansion.com/scarb/) :floppy_disk:
   * [starknet](https://starknet.io/docs)
 * Chef
   * [cookstyle](https://docs.chef.io/cookstyle.html)
@@ -177,6 +182,7 @@ formatting.
   * [dialyxir](https://github.com/jeremyjh/dialyxir)
   * [dogma](https://github.com/lpil/dogma) :floppy_disk:
   * [elixir-ls](https://github.com/elixir-lsp/elixir-ls) :warning:
+  * [lexical](https://github.com/lexical-lsp/lexical) :warning:
   * [mix](https://hexdocs.pm/mix/Mix.html) :warning: :floppy_disk:
 * Elm
   * [elm-format](https://github.com/avh4/elm-format)
@@ -188,6 +194,7 @@ formatting.
   * [erblint](https://github.com/Shopify/erb-lint)
   * [erubi](https://github.com/jeremyevans/erubi)
   * [erubis](https://github.com/kwatch/erubis)
+  * [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)
   * [ruumba](https://github.com/ericqweinstein/ruumba)
 * Erlang
   * [SyntaxErl](https://github.com/ten0s/syntaxerl)
@@ -208,6 +215,9 @@ formatting.
   * [fusion-lint](https://github.com/RyanSquared/fusionscript)
 * Git Commit Messages
   * [gitlint](https://github.com/jorisroovers/gitlint)
+* Gleam
+  * [gleam_format](https://github.com/gleam-lang/gleam)
+  * [gleamlsp](https://github.com/gleam-lang/gleam)
 * GLSL
   * [glslang](https://github.com/KhronosGroup/glslang)
   * [glslls](https://github.com/svenstaro/glsl-language-server)
@@ -277,6 +287,8 @@ formatting.
   * [rustywind](https://github.com/avencera/rustywind)
   * [tidy](http://www.html-tidy.org/)
   * [write-good](https://github.com/btford/write-good)
+* Hurl
+  * [hurlfmt](https://hurl.dev)
 * Idris
   * [idris](http://www.idris-lang.org/)
 * Ink
@@ -296,6 +308,7 @@ formatting.
   * [javalsp](https://github.com/georgewfraser/vscode-javac)
   * [uncrustify](https://github.com/uncrustify/uncrustify)
 * JavaScript
+  * [biome](https://biomejs.dev/)
   * [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
   * [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell)
   * [deno](https://deno.land/)
@@ -313,6 +326,7 @@ formatting.
   * [xo](https://github.com/sindresorhus/xo)
 * JSON
   * [VSCode JSON language server](https://github.com/hrsh7th/vscode-langservers-extracted)
+  * [biome](https://biomejs.dev/)
   * [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
   * [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell) :warning:
   * [dprint](https://dprint.dev)
@@ -325,6 +339,7 @@ formatting.
 * JSON5
   * [eslint](http://eslint.org/) :warning:
 * JSONC
+  * [biome](https://biomejs.dev/)
   * [eslint](http://eslint.org/) :warning:
 * Jsonnet
   * [jsonnet-lint](https://jsonnet.org/learning/tools.html)
@@ -389,6 +404,8 @@ formatting.
   * [mmc](http://mercurylang.org) :floppy_disk:
 * NASM
   * [nasm](https://www.nasm.us/) :floppy_disk:
+* Nickel
+  * [nickel_format](https://github.com/tweag/nickel#formatting)
 * Nim
   * [nim check](https://nim-lang.org/docs/nimc.html) :floppy_disk:
   * [nimlsp](https://github.com/PMunch/nimlsp)
@@ -422,6 +439,8 @@ formatting.
   * [ocamllsp](https://github.com/ocaml/ocaml-lsp)
   * [ocp-indent](https://github.com/OCamlPro/ocp-indent)
   * [ols](https://github.com/freebroccolo/ocaml-language-server)
+* Odin
+  * [ols](https://github.com/DanielGavin/ols)
 * OpenApi
   * [ibm_validator](https://github.com/IBM/openapi-validator)
   * [prettier](https://github.com/prettier/prettier)
@@ -513,6 +532,7 @@ formatting.
   * [refurb](https://github.com/dosisod/refurb) :floppy_disk:
   * [reorder-python-imports](https://github.com/asottile/reorder_python_imports)
   * [ruff](https://github.com/charliermarsh/ruff)
+  * [ruff-format](https://docs.astral.sh/ruff/formatter/)
   * [unimport](https://github.com/hakancelik96/unimport)
   * [vulture](https://github.com/jendrikseipp/vulture) :warning: :floppy_disk:
   * [yapf](https://github.com/google/yapf)
@@ -555,15 +575,18 @@ formatting.
   * [brakeman](http://brakemanscanner.org/) :floppy_disk:
   * [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell)
   * [debride](https://github.com/seattlerb/debride)
+  * [packwerk](https://github.com/Shopify/packwerk) :floppy_disk:
   * [prettier](https://github.com/prettier/plugin-ruby)
   * [rails_best_practices](https://github.com/flyerhzm/rails_best_practices) :floppy_disk:
   * [reek](https://github.com/troessner/reek)
   * [rubocop](https://github.com/bbatsov/rubocop)
   * [ruby](https://www.ruby-lang.org)
+  * [rubyfmt](https://github.com/fables-tales/rubyfmt)
   * [rufo](https://github.com/ruby-formatter/rufo)
   * [solargraph](https://solargraph.org)
   * [sorbet](https://github.com/sorbet/sorbet)
   * [standardrb](https://github.com/testdouble/standard)
+  * [steep](https://github.com/soutaro/steep)
   * [syntax_tree](https://github.com/ruby-syntax-tree/syntax_tree)
 * Rust
   * [cargo](https://github.com/rust-lang/cargo) :floppy_disk: (see `:help ale-integration-rust` for configuration instructions)
@@ -595,6 +618,7 @@ formatting.
 * SML
   * [smlnj](http://www.smlnj.org/)
 * Solidity
+  * [forge](https://github.com/foundry-rs/forge)
   * [solc](https://solidity.readthedocs.io/)
   * [solhint](https://github.com/protofire/solhint)
   * [solium](https://github.com/duaraghav8/Solium)
@@ -651,6 +675,7 @@ formatting.
 * TOML
   * [dprint](https://dprint.dev)
 * TypeScript
+  * [biome](https://biomejs.dev/)
   * [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell)
   * [deno](https://deno.land/)
   * [dprint](https://dprint.dev/)
@@ -670,6 +695,7 @@ formatting.
 * Verilog
   * [hdl-checker](https://pypi.org/project/hdl-checker)
   * [iverilog](https://github.com/steveicarus/iverilog)
+  * [slang](https://github.com/MikePopoloski/slang)
   * [verilator](http://www.veripool.org/projects/verilator/wiki/Intro)
   * [vlog](https://www.mentor.com/products/fv/questa/)
   * [xvlog](https://www.xilinx.com/products/design-tools/vivado.html)
@@ -700,7 +726,7 @@ formatting.
 * XML
   * [xmllint](http://xmlsoft.org/xmllint.html)
 * YAML
-  * [actionlint](https://github.com/rhysd/actionlint) :warning:
+  * [actionlint](https://github.com/rhysd/actionlint)
   * [circleci](https://circleci.com/docs/2.0/local-cli) :floppy_disk: :warning:
   * [gitlablint](https://github.com/elijah-roberts/gitlab-lint)
   * [prettier](https://github.com/prettier/prettier)
